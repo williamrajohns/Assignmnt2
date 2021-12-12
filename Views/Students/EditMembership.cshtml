@@ -1,0 +1,53 @@
+﻿@model Lab4.Models.ViewModels.StudentMembershipViewModel
+
+@{
+    ViewData["Title"] = "EditMembership";
+}
+
+<h1>Edit</h1>
+
+<h4>Student</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+
+            <div class="form-group">
+                Full name
+            </div>
+            <div class="form-group">
+                @Html.DisplayFor(model => model.Student.FullName)
+            </div>
+        </form>
+    </div>
+</div>
+
+@if (Model.Memberships != null)
+{
+    <tbody>
+
+        @foreach (var item in Model.Memberships)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsMember)
+                </td>
+                <td>
+                    <a asp-action="EditMembership" asp-route-id="@item.CommunityId">register/unregister</a> |
+                </td>
+            </tr>
+        }
+    </tbody>
+}
+
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
